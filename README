@@ -1,0 +1,30 @@
+This repository is a packaged version of the recurse Django template tag
+written by Lucas Murray.
+
+Usage information according to
+<http://www.undefinedfire.com/lab/recursion-django-templates/>
+is replicated below:
+
+    Most of the tags are self explanatory, the only one that may cause
+    confusion is the main {% recurse %} one. The format for this tag is
+    {% recurse [children] with [parent] as [child] %} where "[children]" is the
+    property that contains the children of the current element, "[parent]" is
+    your starting element and "[child]" is the variable named used in the loop.
+
+    Here is an example of how you can implement a category tree using this
+    template tag. As you can see it’s fairly simple and with a couple of
+    modifications can be used for just about anything.
+
+        {% load recurse %}
+        ... Headers and stuff ...
+        {% recurse category.category_set.all with categories as category %}
+        <ul>
+            {% loop %}
+            <li>
+                <h{{ level }}>{{ category.title }}</h{{ level }}>
+                {% child %}
+            </li>
+            {% endloop %}
+        </ul>
+        {% endrecurse %}
+        ... The rest of the page ...
